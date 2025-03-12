@@ -1,22 +1,24 @@
-
+import React from 'react';
 import './App.css';
 import Header from './Components/HeaderComp/Header';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import DropdownSection from './Components/DropdownSection';
-import Slideshow from './Components/Slideshow';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Layout from './Components/Layout';
+import HeadBuyCars from './Components/pages/HeadBuyCars';
+import HeadSellCars from './Components/pages/HeadSellCars';
+import MainContent from './Components/MainContent';
+import CarBuy from './Components/pages/CarBuy/CarBuy';
 
 function App() {
   return (
     <Router>
-      <Header />
-      <DropdownSection />
-      <Slideshow />
-
-      {/* <Switch>
-        <Route path="/" exact component={Home} />
-        <Route path="/about" component={About} />
-        <Route path="/contact" component={Contact} />
-      </Switch> */}
+      <Layout>
+        <Routes>
+          <Route path="/buycar" element={<HeadBuyCars />} />
+          <Route path="/buycar/location/:location" element={<CarBuy />} />
+          <Route path="/sellcar" element={<HeadSellCars />} />
+          <Route path="/" element={<MainContent />} />
+        </Routes>
+      </Layout>
     </Router>
   );
 }

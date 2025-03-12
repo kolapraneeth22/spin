@@ -71,6 +71,8 @@ const DropdownSection = () => {
             //   color: 'white',
             // },
             width: `${key.replace(/([A-Z])/g, ' $1').trim().length * 10}px`, 
+            margin : '0 8px',
+            
           }}
         >
           {dropdownOptions[key].map((option) => (

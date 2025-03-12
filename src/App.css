@@ -2,6 +2,10 @@
 header {
   background-color: #1a0033;
   padding: 0.5rem;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+
 }
 
 header h1 {
@@ -10,7 +14,7 @@ header h1 {
 .header-content {
   display: flex;
   align-items: center;
-  /* justify-content: space-between; */
+  justify-content: space-between;
   padding: 0 1rem;
 }
 .logo{
@@ -21,9 +25,57 @@ nav ul {
   padding: 25px;
   margin: 5px;
   display: flex;
+  gap: 20px;
   /* justify-content: space-between; */
   align-items: center;
 }
+
+
+
+nav ul li {
+  position: relative;
+}
+
+nav ul li a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+  display: block;
+}
+
+nav ul li a:hover {
+  background-color: #6a0dad;
+  border-radius: 5px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background-color: #4b0082;
+  border-radius: 5px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.dropdown-menu li {
+  width: 200px;
+}
+
+.dropdown-menu li a {
+  padding: 10px;
+  border-radius: 0;
+}
+
+.dropdown-menu li a:hover {
+  background-color: #6a0dad;
+}
+
+
+
+
 
 nav li {
   margin-right: 1rem;
@@ -48,21 +100,22 @@ nav li a:hover {
 
 .dropdown-section {
   display: flex;
-  /* justify-content: space-around; */
+  justify-content: space-around;
   padding: 10px;
   background-color: #4B0082;
   /* font-size: small; */
 }
 
 .dropdown-box {
-  margin: 0 1rem;
+  margin: 0 8px;
   border: none;
   box-shadow: none;
   width: auto;
 }
 
 .dropdown-section .MuiSvgIcon-root{
-  color: white; /* Change dropdown icon color to white */
+  color: white; 
+
 }
 
 
@@ -73,12 +126,61 @@ nav li a:hover {
 .MuiInputLabel-root {
   color: white;
 }
+
+/* Filterbar Styles */
+.filterbar {
+  position: relative;
+  width: 100%;
+  height: 66px;
+  top: 0px;
+  left: 0;
+  background-color: #9c27b0;
+  overflow: hidden;
+  z-index: 2; /* Ensure Filterbar is above other elements */
+}
+
+.filterbar .MuiSelect-select {
+  padding-top: 18px;
+  text-align: center;
+  font-weight: bold;
+  color: white;
+}
+
+.filterbar .MuiSelect-select:hover {
+  background-color: #63268B;
+}
+
+.filterbar .MuiSelect-select.Mui-focused {
+  background-color: #561381;
+}
+
+.filterbar .MuiMenu-paper {
+  background-color: #561381;
+  color: white;
+}
+
+.filterbar .MuiMenuItem-root:hover {
+  background-color: #63268B;
+  color: white;
+}
 /* SLIDESHOW CSS */
 /* Slideshow container */
 .slideshow-container {
-  max-width: 1000px;
+  max-width: 100%;
   position: relative;
-  margin: auto;
+  margin: 0 auto;
+  height: 420px;
+  z-index: 1;
+}
+
+.mySlides {
+  position: relative;
+  height: 100%;
+}
+.mySlides img {
+  width: 100%;
+  height: 100%;
+  object-fit:fill; /* This ensures the image covers the container without stretching */
 }
 
 /* Caption text */
@@ -100,11 +202,40 @@ nav li a:hover {
   position: absolute;
   top: 0;
 }
+/* Button on slide show */
+.slideshow-button {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #28a745;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  font-size: 16px;
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+  transition: background-color 0.3s ease; /* Smooth transition */
+
+}
+.slideshow-button:hover {
+  background-color: #218838; /* Darker green on hover */
+}
+
 
 /* The dots/bullets/indicators */
+
+.dots-container {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  text-align: right;
+}
 .dot {
-  height: 15px;
-  width: 15px;
+  height: 10px;
+  width: 10px;
   margin: 0 2px;
   background-color: #bbb;
   border-radius: 50%;
@@ -130,4 +261,134 @@ nav li a:hover {
 /* On smaller screens, decrease text size */
 @media only screen and (max-width: 300px) {
   .text {font-size: 11px}
+}
+
+
+/* Toggle Switch Styles */
+/* .toggle-switch {
+  display: flex;
+  justify-content: center;
+  margin: 3px 0px;
+}
+
+.toggle-button {
+  background-color: #f0f0f0;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin: 0 5px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.toggle-button.active {
+  background-color: #6a0dad;
+  color: white;
+} */
+
+/* src/Components/ToggleSwitch.css */
+
+.toggle-switch {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 12px;
+  bottom: -32px;
+  padding: 5px;
+  width: 200px;
+  margin: 20px auto;
+  box-shadow: 0 6px 12px 0 hsla(0, 0%, 53%, .2);
+}
+
+.toggle-option {
+  flex: 1;
+  text-align: center;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.toggle-option.active {
+  background-color: #6a0dad;
+  color: white;
+}
+
+.toggle-option:not(.active) {
+  color: #6a0dad;
+}
+
+
+/* Buy Car Section Styles */
+.buy-car {
+  text-align: center;
+  padding: 20px;
+}
+
+.cards-container {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+}
+
+.card {
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  padding: 20px;
+  width: 200px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card img {
+  width: 100%;
+  border-radius: 10px;
+}
+
+.card h3 {
+  margin: 10px 0;
+}
+
+/* Sell Car Section Styles */
+.sell-car {
+  text-align: center;
+  padding: 20px;
+}
+
+.brands-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.brand {
+  background-color: #f0f0f0;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.brand:hover {
+  background-color: #ddd;
+}
+
+.get-price-button {
+  background-color: #ff4d4d;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  margin-top: 20px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.get-price-button:hover {
+  background-color: #e60000;
 }
