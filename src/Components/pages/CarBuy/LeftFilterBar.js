@@ -1,9 +1,13 @@
 // FilterBar.js
 import React from 'react';
 
-const LeftFilterBar = ({ setSortOption }) => {
+const LeftFilterBar = ({ setSortOption, className }) => { //added className
+  let appliedClassName = "left-filter-bar";
+  if (className) {
+      appliedClassName += ` ${className}`;
+  }
   return (
-    <div className="left-filter-bar">
+      <div className={appliedClassName}>
       <div className="price-range">
         <label>Price Range</label>
         <input type="range" min="50000" max="7000000" />

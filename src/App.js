@@ -1,6 +1,5 @@
 import React from 'react';
 import './App.css';
-import Header from './Components/HeaderComp/Header';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Layout from './Components/Layout';
 import HeadBuyCars from './Components/pages/HeadBuyCars';

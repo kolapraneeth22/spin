@@ -25,7 +25,7 @@
 // export default Header;
 
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import SelectLocation from './SelectLocation';
 import SearchBar from './SearchBar';
 import { Link } from 'react-router-dom';
@@ -33,6 +33,7 @@ import { Link } from 'react-router-dom';
 
 const Header = () => {
   const [dropdownVisible, setDropdownVisible] = useState(false);
+  const dropdownRef = useRef(null); // Create a ref
 
   const handleMouseEnter = () => {
     setDropdownVisible(true);
@@ -53,12 +54,14 @@ const Header = () => {
             <li><Link to="/">Home</Link></li>
             <li
               onMouseEnter={handleMouseEnter}
-              onMouseLeave={handleMouseLeave}
+              ref={dropdownRef} // Attach ref
               className="dropdown"
             >
               <Link to="/buycar">Buy Car</Link>
               {dropdownVisible && (
-                <ul className="dropdown-menu">
+                <ul className="dropdown-menu"
+                onMouseLeave={handleMouseLeave} // MouseLeave on the dropdown
+                >
                   <li><Link to="/buycar">View all cars</Link></li>
                   <li><Link to="/buycar/location/Hyderabad">Used cars in Hyderabad</Link></li>
                   <li><Link to="/buycar/location/Mumbai">Used cars in Mumbai</Link></li>
