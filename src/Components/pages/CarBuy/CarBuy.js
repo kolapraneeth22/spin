@@ -24,7 +24,7 @@
 
 
 import React, { useState } from 'react';
-import { useParams, useLocation  } from 'react-router-dom';
+import { useParams, useLocation } from 'react-router-dom';
 import FilterBar from './CarFilterBar';
 import CarList from './CarList';
 import LeftFilterBar from './LeftFilterBar';
@@ -35,22 +35,36 @@ const CarBuy = () => {
   const [sortOption, setSortOption] = useState('relevance');
   const { location } = useParams();
   const currentLocation = useLocation();
+  const [filterCriteria, setFilterCriteria] = useState({ brands: [], searchTerm: '', priceRange: [0.0, 20.0], });
 
-  const filteredCars = location ? CarData.filter(car => car.location === location) : CarData;
+  const handleFilterChange = (brands, searchTerm, priceRange) => {
+    setFilterCriteria({ brands, searchTerm, priceRange });
+  };
+
+  let filteredCars = location ? CarData.filter(car => car.location === location) : CarData;
+
+  filteredCars = filteredCars.filter((car) => {
+    const brandMatch = filterCriteria.brands.length === 0 || filterCriteria.brands.includes(car.model.split(' ')[0]);
+    const searchMatch = car.model.toLowerCase().includes(filterCriteria.searchTerm.toLowerCase());
+    const priceMatch =
+      parseFloat(car.price) >= filterCriteria.priceRange[0] &&
+      parseFloat(car.price) <= filterCriteria.priceRange[1];
+    return brandMatch && searchMatch && priceMatch;
+  });
 
   const isLocationRoute = currentLocation.pathname.includes('/buycar/location/');
-  const leftFilterBarClass = isLocationRoute ? 'narrow' : 'wide'; //added narrow and wide class
+  const leftFilterBarClass = isLocationRoute ? 'narrow' : 'wide'; //added narrow and wide class  
 
   return (
     <div className="car-buy-container">
-      <LeftFilterBar 
-      className={leftFilterBarClass}
-      setSortOption={setSortOption} />
-      <div style={{ flexGrow: 1 }}>
-        <FilterBar setSortOption={setSortOption} />
-        <div className="car-list-container">
-        <CarList sortOption={sortOption} cars={filteredCars} />
+      <LeftFilterBar
+        className={leftFilterBarClass}
+        onFilterChange={handleFilterChange} />
+      <div className="car-list-container">
+        <div className="car-filter">
+          <FilterBar setSortOption={setSortOption} />
         </div>
+        <CarList sortOption={sortOption} cars={filteredCars} />
       </div>
     </div>
   );

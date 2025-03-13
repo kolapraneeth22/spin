@@ -11,19 +11,13 @@
     }
 }
   .car-buy-container {
-    display: flex;
+    position: relative;
+    height: 100vh;
   }
-  .left-filter-bar.wide {
-    width: 74% !important;
-}
-
-.left-filter-bar.narrow {
-    width: 20% !important;
-}
 
 .left-filter-bar {
-    position: sticky;
-    top: 100px;
+    position: absolute;
+    width: 300px;
     height: calc(100vh - 100px);
     overflow-y: auto;
     overflow-x: hidden;
@@ -59,17 +53,25 @@
   }
   
   .car-list-container {
+    position: relative;
+    left: 300px;
     height: calc(100vh - 200px); /* Adjust 200px based on Header and FilterBar height */
+    width: calc(100% - 300px);
     overflow-y: auto;
+    box-sizing: border-box;
 }
+  .car-filter {
+    bottom: 30px;
+  }
 
   .car-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
-    padding: 20px;
+    padding: 2px;
     overflow-y: auto;
+    width: 100%; 
   }
   
   .car-card {
